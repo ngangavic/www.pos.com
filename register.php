@@ -1,12 +1,20 @@
 <?php
 require "includes/connection.php";
 if(isset($_POST['register'])){
-$empId='4350';
+    //get previous employee id
+    $stmt=$link->prepare("SELECT empId FROM tbl_employees ORDER BY empId DESC LIMIT 1 ");
+    $stmt->execute();
+    $stmt->bind_result($empId);
+    $stmt->fetch();
+    $empId=$empId+1;
+$stmt->close();
+
+//insert to database
 $name=$_POST['name'];
 $phone=$_POST['phone'];
 $email=$_POST['email'];
 $idno=$_POST['idno'];
-$password=md5($_POST['password']);
+$password=password_hash($_POST['password'], PASSWORD_DEFAULT);
 
 $stmt=$link->prepare("INSERT INTO tbl_employees(empId,name,password,phone,email,idNo)VALUES(?,?,?,?,?,?)");
 $stmt->bind_param("ssssss",$empId,$name,$password,$phone,$email,$idno);
