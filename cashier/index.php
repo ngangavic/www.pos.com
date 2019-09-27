@@ -2,7 +2,7 @@
 <?php 
 session_start();
 		$name='';$emp='';
-	if(($_SESSION['name']==$name)&&($SESSION['employeeId']==$emp))
+	if(($_SESSION['name']==$name)&&($_SESSION['employeeId']==$emp))
 	{
 		header('location:../index.php');
 		exit;
