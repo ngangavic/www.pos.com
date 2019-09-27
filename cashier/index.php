@@ -200,6 +200,7 @@ if(!isset($_SESSION["pos"])|| count($_SESSION["pos"])<1){
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
   <?php include"../includes/header-scripts.php";?>
 </head>
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -291,6 +292,7 @@ if(!isset($_SESSION["pos"])|| count($_SESSION["pos"])<1){
     </a>
     <!-- Logout Modal-->
     <?php include"../logout-modal.php";?>
+
     <?php include"../includes/footer-scripts.php"?>
   </div>
 </body>
