@@ -16,12 +16,24 @@ $email=$_POST['email'];
 $idno=$_POST['idno'];
 $password=password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-$stmt=$link->prepare("INSERT INTO tbl_employees(empId,name,password,phone,email,idNo)VALUES(?,?,?,?,?,?)");
-$stmt->bind_param("ssssss",$empId,$name,$password,$phone,$email,$idno);
-if(!$stmt->execute()){
-header("location:register.php?info=error");
+//check if employee already exists
+    $stmt=$link->prepare("SELECT * FROM tbl_employees WHERE email=? OR idNo=?");
+    $stmt->bind_param("ss",$email,$idno);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $count = $result->num_rows;
+if($count==0) {
+$stmt->close();
+//insert data
+    $stmt = $link->prepare("INSERT INTO tbl_employees(empId,name,password,phone,email,idNo)VALUES(?,?,?,?,?,?)");
+    $stmt->bind_param("ssssss", $empId, $name, $password, $phone, $email, $idno);
+    if (!$stmt->execute()) {
+        header("location:register.php?info=error");
+    } else {
+        header("location: register.php?info=success ");
+    }
 }else{
-  header("location: register.php?info=success ");
+    header("location:register.php?info=error");
 }
 }
 
