@@ -2,7 +2,8 @@
 <?php 
 session_start();
 		$name='';$emp='';
-	if(($_SESSION['name']==$name)&&($_SESSION['employeeId']==$emp))
+//	if(($_SESSION['name']==$name)&&($_SESSION['employeeId']==$emp))
+	if (!isset($_SESSION['name'])&&!isset($_SESSION['employeeId'])&&!isset($_SESSION['category']))
 	{
 		header('location:../index.php');
 		exit;
