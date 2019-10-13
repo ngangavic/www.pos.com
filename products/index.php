@@ -39,7 +39,7 @@ if (!isset($_SESSION['name'])&&!isset($_SESSION['employeeId'])&&!isset($_SESSION
       <div class="card mb-3">
         <div class="card-header">
           <i class="fa fa-table"></i> Products
-		<a data-toggle="modal" data-target="#addModal" class="btn btn-primary">Add Product</a>  
+		<a data-toggle="modal" data-target="#addModal" class="btn btn-primary" style="color: #ffffff">Add Product</a>
 		</div>
         <div class="card-body">
           <div class="table-responsive">
