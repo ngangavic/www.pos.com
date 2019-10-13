@@ -1,6 +1,7 @@
 <?php
 require "includes/connection.php";
 if(isset($_POST['register'])){
+    if(isset($_POST['name'])&&isset($_POST['phone'])&&isset($_POST['email'])&&isset($_POST['idno'])&&isset($_POST['password'])&&isset($_POST['password_2'])){
     //get previous employee id
     $stmt=$link->prepare("SELECT empId FROM tbl_employees ORDER BY empId DESC LIMIT 1 ");
     $stmt->execute();
@@ -36,8 +37,10 @@ $stmt->close();
 }else{
     header("location:register.php?info=error");
 }
+}else{
+        header("location:register.php?info=error");
+    }
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -99,7 +102,7 @@ $stmt->close();
               </div>
               <div class="col-md-6">
                 <label for="exampleConfirmPassword">Confirm password</label>
-                <input class="form-control" type="password"  placeholder="Confirm password" id="pass2" onKeyUp="checkPass(); return false;" required>
+                <input class="form-control" type="password" name="password_2"  placeholder="Confirm password" id="pass2" onKeyUp="checkPass(); return false;" required>
               </div>
             </div>
 			<span id="confirmMessage" class="alert alert-danger" style="display:none;"></span>
