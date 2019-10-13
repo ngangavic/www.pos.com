@@ -58,6 +58,18 @@ if (!isset($_SESSION['name'])&&!isset($_SESSION['employeeId'])&&!isset($_SESSION
                         <strong>Failed!</strong> Product already exists.
                     </div>
             <?php
+                }elseif ($_GET['message']=='deactivate'){
+                    ?>
+            <div class="alert alert-success">
+                <strong>Product deactivated</strong>
+            </div>
+            <?php
+                }elseif ($_GET['message']=='activated'){
+                    ?>
+                    <div class="alert alert-success">
+                        <strong>Product activated</strong>
+                    </div>
+                    <?php
                 }
             }
             ?>
