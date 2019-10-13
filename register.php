@@ -71,11 +71,11 @@ $stmt->close();
             <div class="form-row">
               <div class="col-md-6">
                 <label for="exampleInputName">Name</label>
-                <input class="form-control" name="name" type="text" placeholder="Enter first and second name">
+                <input class="form-control" name="name" type="text" placeholder="Enter first and second name" required>
               </div>
               <div class="col-md-6">
                 <label for="exampleInputLastName">Phone</label>
-                <input class="form-control" name="phone" type="text" placeholder="Enter phone number">
+                <input class="form-control" name="phone" type="text" placeholder="Enter phone number" required>
               </div>
             </div>
           </div>
@@ -83,11 +83,11 @@ $stmt->close();
             <div class="form-row">
               <div class="col-md-6">
                 <label for="exampleInputName">Email</label>
-                <input class="form-control" name="email" type="email" placeholder="Enter email">
+                <input class="form-control" name="email" type="email" placeholder="Enter email" required>
               </div>
               <div class="col-md-6">
                 <label for="exampleInputLastName">ID No.</label>
-                <input class="form-control" name="idno" type="text" placeholder="Enter ID No.">
+                <input class="form-control" name="idno" type="text" placeholder="Enter ID No." required>
               </div>
             </div>
           </div>
@@ -95,11 +95,11 @@ $stmt->close();
             <div class="form-row">
               <div class="col-md-6">
                 <label for="exampleInputPassword1">Password</label>
-                <input class="form-control" name="password" type="password"  placeholder="Password" id="pass1">
+                <input class="form-control" name="password" type="password"  placeholder="Password" id="pass1" required>
               </div>
               <div class="col-md-6">
                 <label for="exampleConfirmPassword">Confirm password</label>
-                <input class="form-control" type="password"  placeholder="Confirm password" id="pass2" onKeyUp="checkPass(); return false;">
+                <input class="form-control" type="password"  placeholder="Confirm password" id="pass2" onKeyUp="checkPass(); return false;" required>
               </div>
             </div>
 			<span id="confirmMessage" class="alert alert-danger"></span>
