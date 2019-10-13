@@ -66,12 +66,6 @@ if ($_SESSION['category']=='admin') {
             </a>
         </li>
         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-            <a class="nav-link" href="../transaction">
-                <!-- <i class="fa fa-fw fa-dashboard"></i> -->
-                <span class="nav-link-text">Transaction</span>
-            </a>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
             <a class="nav-link" href="../discount">
                 <!-- <i class="fa fa-fw fa-dashboard"></i> -->
                 <span class="nav-link-text">Discount</span>
