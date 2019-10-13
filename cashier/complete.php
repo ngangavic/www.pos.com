@@ -1,7 +1,6 @@
 <?php 
 session_start();
-		$name='';$emp='';
-	if(($_SESSION['name']==$name)&&($_SESSION['employeeId']==$emp))
+if (!isset($_SESSION['name'])&&!isset($_SESSION['employeeId'])&&!isset($_SESSION['category']))
 	{
 		header('location:../index.php');
 		exit;
@@ -201,9 +200,6 @@ window.open="../cashier/index.php?cmd=emptycart";
         <div class="card-header">
           <i class="fa fa-table"></i> Cashier
 		  <?php //include"search.php"; ?>
-		  
-</script>
-		<!--<button class="btn btn-primary"  data-toggle="modal" data-target="#myModal" >Search</button>-->
 		</div>
 		<div class="row">
         <div class="card-body col-lg-8">
