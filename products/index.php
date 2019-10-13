@@ -40,6 +40,27 @@ if (!isset($_SESSION['name'])&&!isset($_SESSION['employeeId'])&&!isset($_SESSION
         <div class="card-header">
           <i class="fa fa-table"></i> Products
 		<a data-toggle="modal" data-target="#addModal" class="btn btn-primary" style="color: #ffffff">Add Product</a>
+            <?php
+            if (isset($_GET['message'])) {
+                if ($_GET['message']=='success'){
+                ?>
+                <div class="alert alert-success">
+                    <strong>Success!</strong> Product added.
+                </div>
+                    <?php }elseif ($_GET['message']=='error'){?>
+                <div class="alert alert-warning">
+                    <strong>Failed!</strong> An error occurred.
+                </div>
+                <?php
+            }elseif ($_GET['message']=='exist'){
+                    ?>
+                    <div class="alert alert-danger">
+                        <strong>Failed!</strong> Product already exists.
+                    </div>
+            <?php
+                }
+            }
+            ?>
 		</div>
         <div class="card-body">
           <div class="table-responsive">
@@ -72,7 +93,7 @@ if (!isset($_SESSION['name'])&&!isset($_SESSION['employeeId'])&&!isset($_SESSION
                 </tr>
               </tfoot>
 			  <?php 
-			  $selectProducts=mysqli_query($link,"SELECT * FROM tbl_products  ")or die (mysqli_error());
+			  $selectProducts=mysqli_query($link,"SELECT * FROM tbl_products ORDER BY dateadded DESC ")or die (mysqli_error());
 			  while($row=mysqli_fetch_array($selectProducts)){
 			  
 			  ?>

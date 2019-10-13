@@ -6,6 +6,8 @@ include"../includes/connection.php";
             $uploadOk = 1;
             $imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);*/
 if(isset($_POST['add'])){
+    if(isset($_POST['productCode'])&&isset($_POST['description'])&&isset($_POST['sellingPrice'])
+        &&isset($_POST['buyingPrice'])&&isset($_POST['quantity'])&&isset($_POST['taxCode'])&&isset($_POST['department'])){
 	$productCode=filter_var($_POST['productCode'],FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
 	$description=filter_var($_POST['description'],FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
 	$sellingPrice=filter_var($_POST['sellingPrice'],FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
@@ -18,11 +20,12 @@ if(isset($_POST['add'])){
 	$checkExist=mysqli_query($link,"SELECT * FROM tbl_products WHERE productCode='$productCode' ");
 	$data_match=mysqli_num_rows($checkExist);//count the output
 	if($data_match>0){
+        header("location: index.php?message=exist");
 ?>
-		<script>
-		window.location="index.php";
-		alert("Product already exist. \n You can only add a new product");
-		</script>
+<!--		<script>-->
+<!--		window.location="index.php";-->
+<!--		alert("Product already exist. \n You can only add a new product");-->
+<!--		</script>-->
 		
 <?php
 		}else{
@@ -49,18 +52,27 @@ if(isset($_POST['add'])){
             //$insertInto=mysqli_query($link,"INSERT INTO tbl_products(description)VALUES('".$description."')")or die (mysqli_error());
              // $insertInto=mysqli_query($link,"INSERT INTO tbl_products(quantity)VALUES('".$quantity."')")or die (mysqli_error());
              // $insertInto=mysqli_query($link,"INSERT INTO tbl_products(sellingPrice,buyingPrice,taxcode,department,dateadded,image,action)VALUES('".$sellingPrice."','".$buyingPrice."','".$taxCode."','".$department."',now(),'not available','present')")or die (mysqli_error());			  
-          $insertInto=mysqli_query($link,"INSERT INTO tbl_products(productCode,description,quantity,sellingPrice,buyingPrice,taxcode,department,dateadded,image,action)VALUES('".$productCode."','".$description."','".$quantity."','".$sellingPrice."','".$buyingPrice."','".$taxCode."','".$department."',now(),'not available','present')")or die (mysqli_error());	
-           
-		
+          $insertInto=mysqli_query($link,"INSERT INTO tbl_products(productCode,description,quantity,sellingPrice,buyingPrice,taxcode,department,dateadded,image,action)VALUES('".$productCode."','".$description."','".$quantity."','".$sellingPrice."','".$buyingPrice."','".$taxCode."','".$department."',now(),'not available','present')")or die (mysqli_error());
+
+        header("location: index.php?message=success");
 		
 		}
+
 ?>
-        <script>
-		window.location="index.php";
-		alert("Product added successfully");
-		</script>
+<!--        <script>-->
+<!--		window.location="index.php";-->
+<!--		alert("Product added successfully");-->
+<!--		</script>-->
 <?php		
 
+}else{
+        header("location: index.php?message=error");
+        ?>
+<!--        <script>-->
+<!--            window.location="index.php";-->
+<!--            alert(":-( An error occurred. Please try again.");-->
+<!--        </script>-->
+<?php
+    }
 }
-
 ?>
