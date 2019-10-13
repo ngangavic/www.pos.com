@@ -102,7 +102,7 @@ $stmt->close();
                 <input class="form-control" type="password"  placeholder="Confirm password" id="pass2" onKeyUp="checkPass(); return false;" required>
               </div>
             </div>
-			<span id="confirmMessage" class="alert alert-danger"></span>
+			<span id="confirmMessage" class="alert alert-danger" style="display:none;"></span>
           </div>
           <button type="submit" class="btn btn-primary btn-block" name="register" >Register</button>
         </form>
