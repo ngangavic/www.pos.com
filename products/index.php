@@ -76,6 +76,20 @@ if (!isset($_SESSION['name']) && !isset($_SESSION['employeeId']) && !isset($_SES
                             <strong>Product activated</strong>
                         </div>
                         <?php
+                    }elseif ($_GET['message']=='edits'){
+                        ?>
+                        <div class="alert alert-success" id="edits"
+                             onclick="document.getElementById('edits').style.display='none'">
+                            <strong>Product edit successful</strong>
+                        </div>
+                        <?php
+                    }elseif ($_GET['message']=='editf'){
+                        ?>
+                        <div class="alert alert-danger" id="editf"
+                             onclick="document.getElementById('editf').style.display='none'">
+                            <strong>Product edit failed</strong>
+                        </div>
+                        <?php
                     }
                 }
                 ?>
