@@ -20,6 +20,7 @@ if (isset($_POST['login'])) {
             }
             $_SESSION['employeeId'] = $row['empId'];
             $_SESSION['name'] = $row['name'];
+            $_SESSION['category'] = $row['category'];
             header("location:cashier/");
         } else {
             $errorMsg = "Wrong Password";
