@@ -25,8 +25,9 @@ $password=password_hash($_POST['password'], PASSWORD_DEFAULT);
 if($count==0) {
 $stmt->close();
 //insert data
-    $stmt = $link->prepare("INSERT INTO tbl_employees(empId,name,password,phone,email,idNo)VALUES(?,?,?,?,?,?)");
-    $stmt->bind_param("ssssss", $empId, $name, $password, $phone, $email, $idno);
+    $cat='admin';
+    $stmt = $link->prepare("INSERT INTO tbl_employees(empId,name,password,phone,email,idNo,category)VALUES(?,?,?,?,?,?,?)");
+    $stmt->bind_param("sssssss", $empId, $name, $password, $phone, $email, $idno,$cat);
     if (!$stmt->execute()) {
         header("location:register.php?info=error");
     } else {
