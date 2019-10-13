@@ -2,33 +2,38 @@
 include "includes/connection.php";
 session_start();
 if (isset($_POST['login'])) {
-    $empId = ($_POST['empId']);
-    $password = ($_POST['password']);
-    //insert into logins table
-    $logins = mysqli_query($link, "INSERT INTO tbl_logins(empId)VALUES('$empId')") or die(mysqli_query());
+    if (isset($_POST['empId']) && isset($_POST['password'])) {
+        $empId = ($_POST['empId']);
+        $password = ($_POST['password']);
+        //insert into logins table
+        $logins = mysqli_query($link, "INSERT INTO tbl_logins(empId)VALUES('$empId')") or die(mysqli_query());
 
-    //check if employee exists
-    $checkEmp = mysqli_query($link, "SELECT * FROM tbl_employees WHERE empId='" . $empId . "' ") or die(mysqli_error());
-    $count = mysqli_num_rows($checkEmp);
-    $row = mysqli_fetch_array($checkEmp);
-    if ($count == 1) {
-        //verify password
-        if (password_verify($password, $row['password'])) {
-            if (isset($_POST['remme'])) {
-                setcookie('user', $empId, time() + 60 * 60 * 24 * 365, '/');
-                setcookie('pass', md5($password), time() + 60 * 60 * 24 * 365, '/');
+        //check if employee exists
+        $checkEmp = mysqli_query($link, "SELECT * FROM tbl_employees WHERE empId='" . $empId . "' ") or die(mysqli_error());
+        $count = mysqli_num_rows($checkEmp);
+        $row = mysqli_fetch_array($checkEmp);
+        if ($count == 1) {
+            //verify password
+            if (password_verify($password, $row['password'])) {
+                if (isset($_POST['remme'])) {
+                    setcookie('user', $empId, time() + 60 * 60 * 24 * 365, '/');
+                    setcookie('pass', md5($password), time() + 60 * 60 * 24 * 365, '/');
+                }
+                $_SESSION['employeeId'] = $row['empId'];
+                $_SESSION['name'] = $row['name'];
+                $_SESSION['category'] = $row['category'];
+                header("location:cashier/");
+            } else {
+                $errorMsg = "Wrong Password";
             }
-            $_SESSION['employeeId'] = $row['empId'];
-            $_SESSION['name'] = $row['name'];
-            $_SESSION['category'] = $row['category'];
-            header("location:cashier/");
+        } elseif ($count > 1) {
+            $errorMsg = " Kindly see the admin for error rectification ";
         } else {
-            $errorMsg = "Wrong Password";
+            $errorMsg = "You are not allowed to use this system";
         }
-    } elseif ($count > 1) {
-        $errorMsg = " Kindly see the admin for error rectification ";
+
     } else {
-        $errorMsg = "you are not allowed to use this system";
+        $errorMsg = "You are not allowed to use this system";
     }
 
 }
