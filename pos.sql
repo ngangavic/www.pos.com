@@ -2,10 +2,10 @@
 -- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Sep 26, 2019 at 08:00 PM
+-- Host: localhost
+-- Generation Time: Oct 31, 2020 at 10:26 AM
 -- Server version: 10.4.6-MariaDB
--- PHP Version: 7.3.8
+-- PHP Version: 7.3.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -21,6 +21,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `pos`
 --
+CREATE DATABASE IF NOT EXISTS `pos` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
+USE `pos`;
 
 -- --------------------------------------------------------
 
@@ -188,6 +190,7 @@ CREATE TABLE `tbl_employees` (
   `phone` varchar(100) NOT NULL,
   `email` varchar(100) NOT NULL,
   `idNo` varchar(100) NOT NULL,
+  `category` varchar(10) NOT NULL,
   `dateAdded` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -195,10 +198,33 @@ CREATE TABLE `tbl_employees` (
 -- Dumping data for table `tbl_employees`
 --
 
-INSERT INTO `tbl_employees` (`id`, `empId`, `name`, `password`, `phone`, `email`, `idNo`, `dateAdded`) VALUES
-(2, '5534', 'Nganga Victor', '0000', '0700352822', 'ngangavictor10@gmail.com', '564113247', '2018-01-08 21:28:30'),
-(3, '5533', 'Nganga Victor', '0000', '0700352822', 'ngangavictor10@gmail.com', '564113247', '2018-01-08 21:28:41'),
-(4, '4350', 'Vic', '81dc9bdb52d04dc20036dbd8313ed055', '0700352821', 'nae@gmail.com', '35667329', '2019-08-15 19:28:13');
+INSERT INTO `tbl_employees` (`id`, `empId`, `name`, `password`, `phone`, `email`, `idNo`, `category`, `dateAdded`) VALUES
+(2, '5534', 'Nganga Victor', '0000', '0700352822', 'ngangavictor10@gmail.com', '564113247', '', '2018-01-08 21:28:30'),
+(3, '5533', 'Nganga Victor', '0000', '0700352822', 'ngangavictor10@gmail.com', '564113247', '', '2018-01-08 21:28:41'),
+(4, '4350', 'Vic', '81dc9bdb52d04dc20036dbd8313ed055', '0700352821', 'nae@gmail.com', '35667329', '', '2019-08-15 19:28:13'),
+(7, '5535', 'Vic', '$2y$10$AjAn.9U1hM3LAiRAQkUCbOez19RlZ36W/y.CJ4sNRslVRwkle9FIu', 'Nga', 'nga@gmail.com', '45469', 'admin', '2020-10-31 12:24:16');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tbl_logins`
+--
+
+CREATE TABLE `tbl_logins` (
+  `id` int(11) NOT NULL,
+  `empId` int(11) DEFAULT NULL,
+  `date` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tbl_logins`
+--
+
+INSERT INTO `tbl_logins` (`id`, `empId`, `date`) VALUES
+(1, 4350, '2020-10-31 12:21:30'),
+(2, 4350, '2020-10-31 12:21:52'),
+(3, 4350, '2020-10-31 12:21:58'),
+(4, 5535, '2020-10-31 12:24:36');
 
 -- --------------------------------------------------------
 
@@ -240,7 +266,7 @@ CREATE TABLE `tbl_products` (
 --
 
 INSERT INTO `tbl_products` (`id`, `productCode`, `description`, `quantity`, `sellingPrice`, `buyingPrice`, `taxcode`, `department`, `dateadded`, `image`, `action`) VALUES
-(1, '3263677548', 'FOOD ', 75, '56', '45', 'B', '4', '2018-01-07 14:08:25', 'not available', 'present'),
+(1, '3263677548', 'FOOD ', 73, '56', '45', 'B', '4', '2018-01-07 14:08:25', 'not available', 'present'),
 (2, '489676434', 'Book A4 Pelican', 152, '70', '50', 'A', '2', '2018-01-07 14:11:51', 'not available', 'present'),
 (3, '255355677', 'HB pencil ', 199, '20', '15', 'A', '2', '2018-01-07 14:12:33', 'not available', 'present'),
 (4, '9776534445', 'Eraser Big', 246, '35', '20', 'A', '2', '2018-01-07 14:13:12', 'not available', 'present'),
@@ -363,7 +389,8 @@ INSERT INTO `tbl_product_his` (`id`, `productCode`, `description`, `taxcode`, `t
 (84, '3263677548', 'FOOD ', 'B', '1048', '1', '47', '47', '50', '3', '18', '2019-08-17', '23:57:32', '5533', '1', 2019, '08', '17', '45'),
 (85, '489676434', 'Book A4 Pelican', 'A', '1049', '1', '70', '70', '100', '30', '0', '2019-08-17', '23:58:59', '5533', '1', 2019, '08', '17', '50'),
 (86, '489676434', 'Book A4 Pelican', 'A', '1050', '1', '70', '70', '100', '30', '0', '2019-08-18', '00:00:04', '5533', '1', 2019, '08', '17', '50'),
-(87, '3263677548', 'FOOD ', 'B', '1051', '1', '47', '47', '50', '3', '18', '2019-08-18', '00:00:42', '4350', '1', 2019, '08', '17', '45');
+(87, '3263677548', 'FOOD ', 'B', '1051', '1', '47', '47', '50', '3', '18', '2019-08-18', '00:00:42', '4350', '1', 2019, '08', '17', '45'),
+(88, '3263677548', 'FOOD ', 'B', '1052', '2', '47', '94', '100', '6', '36', '2020-10-31', '12:25:04', '5535', '1', 2019, '10', '31', '45');
 
 -- --------------------------------------------------------
 
@@ -594,7 +621,8 @@ INSERT INTO `tbl_transaction` (`id`, `transactionNo`, `year`, `month`, `day`, `t
 (134, '1049', 2019, '08', '17', '23:59:01', '70', '70', NULL, '11.2', '0', 'cash', '1', '5533'),
 (135, '1049', 2019, '08', '17', '23:59:02', '70', '70', NULL, '11.2', '0', 'cash', '1', '5533'),
 (136, '1050', 2019, '08', '17', '00:00:08', '70', '70', NULL, '11.2', '0', 'cash', '1', '5533'),
-(137, '1051', 2019, '08', '17', '00:00:43', '47', '0', '47', '0', '18', 'cash', '1', '4350');
+(137, '1051', 2019, '08', '17', '00:00:43', '47', '0', '47', '0', '18', 'cash', '1', '4350'),
+(138, '1052', 2019, '10', '31', '12:25:07', '94', '0', '94', '0', '36', 'cash', '1', '5535');
 
 --
 -- Indexes for dumped tables
@@ -640,6 +668,12 @@ ALTER TABLE `tbl_discount`
 -- Indexes for table `tbl_employees`
 --
 ALTER TABLE `tbl_employees`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `tbl_logins`
+--
+ALTER TABLE `tbl_logins`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -734,7 +768,13 @@ ALTER TABLE `tbl_discount`
 -- AUTO_INCREMENT for table `tbl_employees`
 --
 ALTER TABLE `tbl_employees`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `tbl_logins`
+--
+ALTER TABLE `tbl_logins`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `tbl_paidout`
@@ -758,7 +798,7 @@ ALTER TABLE `tbl_products_his`
 -- AUTO_INCREMENT for table `tbl_product_his`
 --
 ALTER TABLE `tbl_product_his`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
 
 --
 -- AUTO_INCREMENT for table `tbl_return`
@@ -782,7 +822,7 @@ ALTER TABLE `tbl_taxcode`
 -- AUTO_INCREMENT for table `tbl_transaction`
 --
 ALTER TABLE `tbl_transaction`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=138;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=139;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
