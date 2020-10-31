@@ -6,7 +6,7 @@ if (isset($_POST['login'])) {
         $empId = ($_POST['empId']);
         $password = ($_POST['password']);
         //insert into logins table
-        $logins = mysqli_query($link, "INSERT INTO tbl_logins(empId)VALUES('$empId')") or die(mysqli_query());
+        $logins = mysqli_query($link, "INSERT INTO tbl_logins(empId)VALUES('$empId')") or die(mysqli_error());
 
         //check if employee exists
         $checkEmp = mysqli_query($link, "SELECT * FROM tbl_employees WHERE empId='" . $empId . "' ") or die(mysqli_error());
